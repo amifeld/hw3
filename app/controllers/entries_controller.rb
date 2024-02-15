@@ -10,6 +10,12 @@ class EntriesController < ApplicationController
     # render companies/show view with details about Entry
   end
 
+  def show
+    # find a Entry
+    @places = Place.find_by({"id" => params["id"]})
+    # render companies/show view with details about Entry
+  end
+
   def new
     # render view with new Entry form
   end
