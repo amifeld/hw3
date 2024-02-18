@@ -7,6 +7,7 @@ class PlacesController < ApplicationController
   def show
     # find a Place
     @places = Place.find_by({"id" => params["id"]})
+    @entries = Entry.where({"place_id" => @places["id"]})
     # render companies/show view with details about Place
   end
 

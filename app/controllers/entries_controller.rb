@@ -7,14 +7,10 @@ class EntriesController < ApplicationController
   def show
     # find a Entry
     @entries = Entry.find_by({"id" => params["id"]})
+    @places = Place.where({"id" => @entries["place_id"]})
     # render companies/show view with details about Entry
   end
 
-  def show
-    # find a Entry
-    @places = Place.find_by({"id" => params["id"]})
-    # render companies/show view with details about Entry
-  end
 
   def new
     # render view with new Entry form
@@ -25,10 +21,13 @@ class EntriesController < ApplicationController
     @entries = Entry.new
     # assign user-entered form data to Entry's columns
     @entries["title"] = params["title"]
+    @entries["description"] = params["description"]
+    @entries["posted_on"] = params["posted_on"]
+    @entries["place_id"] = params["place_id"]
     # save Entry row
     @entries.save
     # redirect user
-    redirect_to "/entries"
+    redirect_to "/places/#{params["place_id"]}"
   end
 
   def edit
