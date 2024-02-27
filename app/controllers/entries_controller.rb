@@ -32,7 +32,23 @@ class EntriesController < ApplicationController
 
   def edit
     # find a Entry
+      @entries = Entry.find_by({ "id" => params["id"] })
     # render view with edit Entry form
+  end
+
+  def update
+    @entries = Entry.find_by({ "id" => params["id"] })
+    @entries["title"] = params["title"]
+    @entries["description"] = params["description"]
+    @entries["posted_on"] = params["posted_on"]
+    @entries.save
+    redirect_to "/places/#{params["place_id"]}"
+  end
+
+  def destroy
+    @entries = Entry.find_by({ "id" => params["id"] })
+    @entries.destroy
+    redirect_to "/places/#{params["place_id"]}"
   end
 
 end
